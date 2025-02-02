@@ -234,10 +234,10 @@
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        const WEATHER_API_KEY = '76baa7c171812815d116c862d8245581';
-        const TIMEZONE_API_KEY = 'VG35MRJ1MEIT';
-        const SUPABASE_URL = 'https://vwblwyrsdexqgdebbmdd.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3Ymx3eXJzZGV4cWdkZWJibWRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg0MDQ1MTEsImV4cCI6MjA1Mzk4MDUxMX0.-0ipbC-Z1YIuKkM3HuDqQabAFHArLPuChGz02RIPgJE';
+        const WEATHER_API_KEY = window.env?.WEATHER_API_KEY;
+        const TIMEZONE_API_KEY = window.env?.TIMEZONE_API_KEY;
+        const SUPABASE_URL = window.env?.SUPABASE_URL;
+        const SUPABASE_ANON_KEY = window.env?.SUPABASE_ANON_KEY;
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -280,7 +280,6 @@
                 `;
                 currentSessionId = sessionCode;
 
-                // Subscribe to changes for this session
                 subscribeToSessionChanges(sessionCode);
             } catch (error) {
                 console.error('Error creating session:', error);
@@ -310,10 +309,7 @@
                     document.getElementById('joinSession').classList.add('hidden');
                     document.getElementById('controlPanel').classList.remove('hidden');
                     
-                    // Subscribe to changes for this session
                     subscribeToSessionChanges(sessionCode);
-                    
-                    // Load current session state
                     loadLatestVideo();
                 } else {
                     alert('Session not found');

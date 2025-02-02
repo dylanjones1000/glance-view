@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GlanceView</title>
-    <script src="env.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body {
@@ -197,6 +196,15 @@
     </style>
 </head>
 <body>
+    <script>
+        window.env = {
+            SUPABASE_URL: '${process.env.SUPABASE_URL}',
+            SUPABASE_ANON_KEY: '${process.env.SUPABASE_ANON_KEY}',
+            WEATHER_API_KEY: '${process.env.WEATHER_API_KEY}',
+            TIMEZONE_API_KEY: '${process.env.TIMEZONE_API_KEY}'
+        };
+    </script>
+
     <div id="displayMode" style="display: none;">
         <div id="youtubePlayer"></div>
         <div id="time" class="overlay">12:00:00</div>
